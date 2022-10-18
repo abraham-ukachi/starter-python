@@ -16,8 +16,8 @@ Here is a list of all the jobs for to this project, their main `.py` script, and
 | 1 | *`Job1`* | **job01.py** | [Done](./job01.py) |
 | 2 | *`Job2`* | **job02.py** | [Done](./job02.py) |
 | 3 | *`Job3`* | **job03.py** | [Done](./job03.py) |
-| 4 | *`Job4`* | **job04.py** | _**Working**_ |
-| 5 | *`Job5`* | **job05.py** | Pending |
+| 4 | *`Job4`* | **job04.py** | [Done](./job04.py) |
+| 5 | *`Job5`* | **job05.py** | _*In progress*_ |
 | 6 | *`Job6`* | **job06.py** | Pending |
 | 7 | *`Job7`* | **job07.py** | Pending |
 | 8 | *`Job8`* | **job08.py** | Pending |
