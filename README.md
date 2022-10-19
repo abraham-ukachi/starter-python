@@ -20,8 +20,8 @@ Here is a list of all the jobs for to this project, their main `.py` script, and
 | 3 | [*`Job3`*](#Job3) | **job03.py** | [Done](./job03.py)\* |
 | 4 | [*`Job4`*](#Job4) | **job04.py** | [Done](./job04.py)\* |
 | 5 | [*`Job5`*](#Job5) | **job05.py** | [Done](./job05.py)\* |
-| 6 | *`Job6`* | **job06.py** | _*In progress*_ |
-| 7 | *`Job7`* | **job07.py** | Pending |
+| 6 | [*`Job6`*](#Job6) | **job06.py** | [Done](./job06.py)\* |
+| 7 | *`Job7`* | **job07.py** | _*In progress*_ |
 | 8 | *`Job8`* | **job08.py** | Pending |
 | 9 | *`Job9`* | **job09.py** | Pending |
 | 10 | *`Job10`* | **job10.py** | Pending |
@@ -41,7 +41,7 @@ Here is a list of all the jobs for to this project, their main `.py` script, and
 | 24 | *`Job24`* | **job24.py** | **Paused** |
 
 
-> \*: Needs to be updated later
+> \*: Still needs to be updated
 
 ## TODOs
 
