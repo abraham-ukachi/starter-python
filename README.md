@@ -18,7 +18,7 @@ Here is a list of all the jobs for to this project, their main `.py` script, and
 | 3 | *`Job3`* | **job03.py** | [Done](./job03.py) |
 | 4 | *`Job4`* | **job04.py** | [Done](./job04.py) |
 | 5 | *`Job5`* | **job05.py** | [Done](./job05.py) |
-| 6 | *`Job6`* | **job06.py** | _*In progress*_ |
+| 6 | *`Job6`* | **job06.py** | _*Paused*_ |
 | 7 | *`Job7`* | **job07.py** | Pending |
 | 8 | *`Job8`* | **job08.py** | Pending |
 | 9 | *`Job9`* | **job09.py** | Pending |
@@ -36,7 +36,7 @@ Here is a list of all the jobs for to this project, their main `.py` script, and
 | 21 | *`Job21`* | **job21.py** | Pending |
 | 22 | *`Job22`* | **job22.py** | Pending |
 | 23 | *`Job23`* | **job23.py** | [Done](./job23.py) |
-| 24 | *`Job24`* | **job24.py** | Pending |
+| 24 | *`Job24`* | **job24.py** | _**Trying**_ |
 
 
 > NOTE:
