@@ -102,7 +102,7 @@ def printRange(val1, val2, delay = 0.1):
         return False # <- IDEA: use continue instead, hhmmmm...
 
     # Tell the world we're about to print numbers between `val1` and `val2`
-    print("\n" + logMsg[LANG][LOG_MSG_BUSY].format(val1, val2))
+    print(logMsg[LANG][LOG_MSG_BUSY].format(val1, val2))
     
     # Wait for twice the given `delay`
     time.sleep(delay * 2)
@@ -143,7 +143,10 @@ def printRange(val1, val2, delay = 0.1):
         # wait for the specified `delay` before printing the next result
         time.sleep(delay)
 
+    # Tell the world that we are done printing numbers
+    print(logMsg[LANG][LOG_MSG_DONE])
 
+    
 
 
 # ======= END OF PUBLIC FUNCTIONS =======
