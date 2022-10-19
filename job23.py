@@ -7,14 +7,20 @@
 # Usage:
 #   1-|>  python3 job23.py
 #
-#   2-|>  import job23
+#   2-|>  import job23 as j23
+#    -|>
+#    -|>  word = "think"
+#    -|>  modWord = j23.getModifiedWord(word)
+#    -|>  print(modWord)
+#     |
+#    =|o-> "thkin"
 #
 ##############################
 # IMPORTANT: This code is a work in progress and subject to major changes until version 0.1
 ##############################
 
 #========== Job 23 ===============
-#
+#     >>> DESCRIPTION <<<
 #~~~~~~~~~ (French) ~~~~~~~~~~~~~~
 #
 # - Créer un programme job23.py qui demandera à l’utilisateur de renseigner un mot \
@@ -43,9 +49,61 @@ import re # <- python's built-in RegEx module
 import itertools # <- python's buit-in iteration tool / module
 
 
+# Let's define some constants, shall we? ;)
+
+# - Error Message constants
+ERR_MSG_ONE_WORD = "one_word"
+ERR_MSG_NO_SPACE = "no_space"
+ERR_MSG_ONLY_ALPHA = "only_alpha"
+# - Prompt Sign constants
+PROMPT_SIGN_DEFAULT = "\x1b[1m\x1b[34mI\x1b[0m " # <- (bold + blue)
+PROMPT_SIGN_IN = "\x1b[1m\x1b[32m>>\x1b[0m " # <- (bold + green)
+PROMPT_SIGN_OUT = "\x1b[1m\x1b[34m<<\x1b[0m " # <- (bold + blue)
+PROMPT_SIGN_ERR = "\x1b[1m\x1b[31m<<\x1b[0m " # <- (bold + red)
+# - Log messages constants
+LOG_MSG_WELCOME = "welcome"
+LOG_MSG_WORD = "word"
+LOG_MSG_MOD_WORD = "mod_word"
+# - Other constants
+LANG = "en" # <- default language set to "english", duh!
+
+# Initialize the `errorMsg` object/dict with english (EN) and french (FR)
+errorMsg = { "en" : {}, "fr": {} } # <- hhmmm, so tempting to import some `json` here ;-)
+errorMsg["en"][ERR_MSG_ONE_WORD] = "Only 1 word is allowed"
+errorMsg["en"][ERR_MSG_NO_SPACE] = "Spaces are not allowed"
+errorMsg["en"][ERR_MSG_ONLY_ALPHA] = "Only lowercased alphabets (a-z) are allowed"
+
+# TODO: Add error messages in "fr" (French)
+
+# Initialize the `logMsg` object too
+logMsg = { "en": {}, "fr": {} }
+logMsg["en"][LOG_MSG_WELCOME] = "Welcome to Job{}"
+logMsg["en"][LOG_MSG_WORD] = "Enter a word:"
+logMsg["en"][LOG_MSG_MOD_WORD] = "Your new word is \x1b[1m\x1b[32m%s\x1b[0m"
+
+# TODO: Add log messages in "fr" (French)
+
+
+
 # Defining private & public functions...
 
-# PRIVATE FUNCTIONS
+# ========== PRIVATE FUNCTIONS
+
+def _showWelcomeMessage(msg, job = 23):
+    """
+    Displays a welcome message for the current job
+
+    :param { str } msg: the message to be displayed
+    :param { int } job: the job number
+     """
+    print("\x1b[2m") # <- everything should be in gray color
+    print("=" * 33) # <- top/open style
+    print("# \t  ✺◟(•‿•)◞✺" + "\t\t#")
+    print("# \t" + msg.format(job) + "\t#")
+    print("=" * 33) # <- bottom/close style
+    print("\x1b[0m") # <- stop coloring
+
+
 
 # Define the `_isOneWord` function
 def _isOneWord(txt):
@@ -143,11 +201,64 @@ def _onlyAlphaChars(txt):
     return onlyAlphaChars
         
 
+# Define the `_printSortedCombos` function
+def _printSortedCombos(sortedCombos, word = "", wordLimit = 5, delay = 0.1):
+    """
+    Prints out the given `sortedCombos`.
+    NOTE: This function is used for debugging purposes
+
+    :param { list } sortedCombos
+    :param { str } word
+    :param { int } wordLimit
+    :param { float } delay
+    """
+    
+    # get the total number of words in the list
+    total = len(sortedCombos)
+    # calculate the number of lines to be printed 
+    # based on the given `wordLimit` and `total`
+    lines = int(total / wordLimit)
+    
+    # initialize the `currentIndex` variable
+    currentIndex = 0
+
+    # set the `wordHighlighted` variable to False
+    wordHighlighted = False
+
+    
+    # For each line...
+    for line in range(lines):
+        # ...calculate the start index
+        startIndex = line * wordLimit
+        # calculate the end index
+        endIndex = currentIndex + wordLimit
+        
+        # slice the `sortedCombos` list with `startIndex` and `endIndex`
+        slicedList = sortedCombos[startIndex:endIndex]
+
+        # stringify or join the list with '|' as `txt`
+        txt = "|".join(slicedList)
+
+        # if there's a word, found in `txt`, and it hasn't been highlighted yet...
+        if len(word) > 0 and word in txt and wordHighlighted == False:
+            # ...highlight the word
+            txt = txt.replace(word, "\x1b[0m\x1b[36m{}\x1b[0m\x1b[2m".format(word))
+            # inform this loop that we've highlighted the word already by setting
+            # `wordHighlighted` to True
+            wordHighlighted = True
+        
+        # print the sliced list, gray and enclosed in '|'
+        print("\x1b[2m|{}|\x1b[0m".format(txt))
+        
+        # update the current index
+        currentIndex = endIndex
+    
+
+# ======== END OF PRIVATE FUNCTION 
 
 
 
-
-# PUBLIC FUNCTIONS
+# ========== PUBLIC FUNCTIONS
 
 # Define the `isValid` function
 def isValid(txt):
@@ -185,16 +296,17 @@ def getModifiedWord(word):
     # Initialize the `modifiedWord` variable
     modifiedWord = ""
     
-    # Convert `word` to a list and assign it to a variable `li`
-    li = list(word) # <- ie. "mango" will return => ['m', 'a', 'n', 'g', 'o']
-
     # Get a list of all permutations of `word`,
     # using the permutation() function in the `itertools` module we imported
-    permutations = list(itertools.permutations(li))
+    permutations = list(itertools.permutations(word))
     # neatly join each permutation into a `combos` list
     combos = [''.join(permutation) for permutation in permutations]
     # sort the `combos` alphabetically
     sortedCombos = sorted(combos)
+
+    # DEBUG: print out `sortedCombos`
+    _printSortedCombos(sortedCombos, word)
+
     # get the current location of `word` in the `sortedCombos` list
     wordIndex = sortedCombos.index(word)
     
@@ -209,7 +321,9 @@ def getModifiedWord(word):
     # Update the `modifiedWord` with the word at the closest word index in `sortedCombos`
     modifiedWord = sortedCombos[closestWordIndex]
     
-    ######### TODO: Remove this code snippet later ###########
+    ###### TODO: Remove this code snippet later - maybe ? ########
+    # Convert `word` to a list and assign it to a variable `li`
+    # li = list(word) # <- ie. "mango" will return => ['m', 'a', 'n', 'g', 'o']
     # Get the total number of characters as `totalChar`
     # totalChar = len(li) - 1 # <- we do not want to swap the last character.
     #
@@ -236,49 +350,19 @@ def getModifiedWord(word):
 
 
 
-# ===== END OF FUNCTIONS =========
-
-
-
-# Let's define some constants, shall we? ;)
-# - Error Message constants
-ERR_MSG_ONE_WORD = "one_word"
-ERR_MSG_NO_SPACE = "no_space"
-ERR_MSG_ONLY_ALPHA = "only_alpha"
-# - Prompt Sign constants
-PROMPT_SIGN_DEFAULT = "\x1b[1m\x1b[34mI\x1b[0m " # <- (bold + blue)
-PROMPT_SIGN_IN = "\x1b[1m\x1b[32m>>\x1b[0m " # <- (bold + green)
-PROMPT_SIGN_OUT = "\x1b[1m\x1b[34m<<\x1b[0m " # <- (bold + blue)
-PROMPT_SIGN_ERR = "\x1b[1m\x1b[31m<<\x1b[0m " # <- (bold + red)
-# - Log messages constants
-LOG_MSG_WORD = "word"
-LOG_MSG_MOD_WORD = "mod_word"
-# - Other constants
-LANG = "en" # <- default language set to "english", duh!
-
-# Initialize the `errorMsg` object/dict with english (EN) and french (FR)
-errorMsg = { "en" : {}, "fr": {} } # <- hhmmm, so tempting to import some `json` here ;-)
-errorMsg["en"][ERR_MSG_ONE_WORD] = "Only 1 word is allowed"
-errorMsg["en"][ERR_MSG_NO_SPACE] = "Spaces are not allowed"
-errorMsg["en"][ERR_MSG_ONLY_ALPHA] = "Only lowercased alphabets (a-z) are allowed"
-
-# TODO: Add error messages in "fr" (French)
-
-# Initialize the `logMsg` object too
-logMsg = { "en": {}, "fr": {} }
-logMsg["en"][LOG_MSG_WORD] = "Enter a word:"
-logMsg["en"][LOG_MSG_MOD_WORD] = "Your new word is \x1b[1m\x1b[32m%s\x1b[0m"
-
-# TODO: Add log messages in "fr" (French)
-
+# ===== END OF PUBLIC FUNCTIONS =========
 
 
 # Define our main function
 def main():
     """
-    Job 23 - Aller plus loin
+    The main function of `Job23` - Aller plus loin
     """
-    print("\n") # <- first, let's go down one line (it's cleaner this way)
+    # First, create a welcome message
+    welcomeMsg = logMsg[LANG][LOG_MSG_WELCOME]
+    # Show the welcome message
+    _showWelcomeMessage(welcomeMsg)
+    
     # Print out our first message
     print(PROMPT_SIGN_DEFAULT + logMsg[LANG][LOG_MSG_WORD] + " \x1b[2m[a-z]\x1b[0m")
     # Now, get a word or text from the user
@@ -312,6 +396,4 @@ else:
     # `job23.py` is being imported into another module")
     # do something else here
     pass
-
-
 
