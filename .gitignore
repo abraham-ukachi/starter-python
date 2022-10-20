@@ -102,3 +102,12 @@ dist
 
 # TernJS port file
 .tern-port
+
+# vim temp files
+*.swp
+
+# pycache
+__pycache__/
+
+# Templates directories
+templates/
