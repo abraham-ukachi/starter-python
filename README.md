@@ -21,8 +21,8 @@ Here is a list of all the jobs for to this project, their main `.py` script, and
 | 4 | [*`Job4`*](#Job4) | **job04.py** | [Done](./job04.py)\* |
 | 5 | [*`Job5`*](#Job5) | **job05.py** | [Done](./job05.py)\* |
 | 6 | [*`Job6`*](#Job6) | **job06.py** | [Done](./job06.py)\* |
-| 7 | *`Job7`* | **job07.py** | _*In progress*_ |
-| 8 | *`Job8`* | **job08.py** | Pending |
+| 7 | [*`Job7`*](#Job7) | **job07.py** | [Done](./job07.py)\* |
+| 8 | *`Job8`* | **job08.py** | _*In progress*_ |
 | 9 | *`Job9`* | **job09.py** | Pending |
 | 10 | *`Job10`* | **job10.py** | Pending |
 | 11 | *`Job11`* | **job11.py** | Pending |
@@ -48,6 +48,8 @@ Here is a list of all the jobs for to this project, their main `.py` script, and
 - [ ] Optimize all jobs
 - [ ] Remove unnecessary comments
 
+---
+---
 
 ## Job1
 
@@ -59,7 +61,7 @@ Things to do in *`Job1`*:
 
 - [ ] Optimize the script
 
-
+---
 
 ## Job2
 
@@ -71,6 +73,7 @@ Things to do in *`Job2`*:
 
 - [ ] Optimize the script
 
+---
 
 ## Job3
 
@@ -82,6 +85,7 @@ Things to do in *`Job3`*:
 
 - [ ] Optimize the script
 
+---
 
 ## Job4
 
@@ -93,6 +97,7 @@ Things to do in *`Job4`*:
 
 - [ ] Optimize the script
 
+---
 
 ## Job5
 
@@ -104,6 +109,7 @@ Things to do in *`Job5`*:
 
 - [ ] Optimize the script
 
+---
 
 ## Job6
 
@@ -114,6 +120,20 @@ Things to do in *`Job5`*:
 Things to do in *`Job6`*:
 
 - [ ] Optimize the script
+
+---
+
+## Job7
+
+### Example usage
+
+### TODOs
+
+Things to do in *`Job7`*:
+
+- [ ] Optimize the script
+
+---
 
 ## Job23
 
